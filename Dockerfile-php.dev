@@ -1,0 +1,36 @@
+FROM php:8.3-apache
+
+RUN apt-get update && apt-get install -y \
+    libpng-dev \
+    libjpeg-dev \
+    libonig-dev \
+    libxml2-dev \
+    libzip-dev zip \
+    unzip \
+    curl \
+    git \
+    && docker-php-ext-install pdo_mysql mbstring bcmath gd soap zip
+
+RUN a2enmod rewrite
+
+# Asegúrate de crear este archivo en ./docker/apache/MiBodeguita.conf
+COPY ./docker/apache/MiBodeguita.conf /etc/apache2/sites-available/MiBodeguita.conf
+
+RUN a2ensite MiBodeguita.conf && a2dissite 000-default.conf
+
+WORKDIR /var/www/html/MiBodeguita
+
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+RUN git config --global --add safe.directory /var/www/html/MiBodeguita
+
+# Instalación de Node.js 22
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash \
+    && export NVM_DIR="$HOME/.nvm" \
+    && . "$NVM_DIR/nvm.sh" \
+    && nvm install 22 \
+    && ln -s "$NVM_DIR/versions/node/$(ls $NVM_DIR/versions/node/)/bin/node" /usr/bin/node \
+    && ln -s "$NVM_DIR/versions/node/$(ls $NVM_DIR/versions/node/)/bin/npm" /usr/bin/npm \
+    && ln -s "$NVM_DIR/versions/node/$(ls $NVM_DIR/versions/node/)/bin/npx" /usr/bin/npx
+
+EXPOSE 80
