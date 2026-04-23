@@ -11,7 +11,6 @@
 * 📦 Control básico de inventario
 * 📊 Reportes de ventas
 * 👥 Gestión de clientes
-* 🔐 Sistema multi-tenant (multi-negocio)
 * ☁️ Acceso desde cualquier dispositivo
 * 🇵🇪 Integración con SUNAT
 
@@ -22,7 +21,6 @@
 * **Backend:** Laravel 12
 * **Frontend:** Livewire + AlpineJS
 * **Base de datos:** MySQL
-* **Arquitectura:** Multi-tenancy (tenancyforlaravel)
 * **Otros:** TailwindCSS, Docker (opcional)
 
 ---
@@ -33,7 +31,7 @@
 * Composer
 * Node.js >= 22
 * MySQL o MariaDB
-* Servidor web (Apache / Nginx)
+* Servidor web (Apache)
 
 ---
 
@@ -63,7 +61,7 @@ php artisan key:generate
 4. Configurar base de datos en `.env`
 
 ```env
-DB_DATABASE=mibodeguita
+DB_DATABASE=mibodeguita_db
 DB_USERNAME=root
 DB_PASSWORD=
 ```
@@ -80,16 +78,6 @@ php artisan migrate
 php artisan serve
 npm run dev
 ```
-
----
-
-## 🏢 Multi-tenancy
-
-MiBodeguita utiliza arquitectura multi-tenant, lo que permite que múltiples negocios usen el sistema de forma independiente.
-
-* Cada tienda tiene su propia base de datos o esquema
-* Separación total de información
-* Ideal para SaaS
 
 ---
 
