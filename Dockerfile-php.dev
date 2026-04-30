@@ -19,6 +19,10 @@ COPY ./docker/apache/MiBodeguita.conf /etc/apache2/sites-available/MiBodeguita.c
 RUN a2ensite MiBodeguita.conf && a2dissite 000-default.conf
 
 WORKDIR /var/www/html/MiBodeguita
+COPY . .
+
+RUN chown -R www-data:www-data /var/www/html/MiBodeguita \
+    && chmod -R 775 /var/www/html/MiBodeguita/storage /var/www/html/MiBodeguita/bootstrap/cache
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
