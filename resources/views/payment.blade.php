@@ -1,161 +1,168 @@
-@extends('layouts.app')
+<x-app-layout>
 
-@section('content')
-<div class="container-fluid">
-    <div class="row">
+<div class="flex min-h-screen bg-gray-100">
 
-        <!-- Sidebar -->
-        <div class="col-md-2 bg-light vh-100 p-3 border-end">
-            <h5 class="fw-bold">FacturaPro</h5>
-            <ul class="nav flex-column mt-4">
-                <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Comprobantes</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Clientes</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Productos</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Reportes</a></li>
-                <li class="nav-item mt-3">
-                    <strong>Configuración</strong>
-                    <ul class="nav flex-column ms-3">
-                        <li><a class="nav-link active text-primary" href="#">Métodos de Pago</a></li>
-                        <li><a class="nav-link" href="#">Impuestos</a></li>
-                        <li><a class="nav-link" href="#">Integración SUNAT</a></li>
-                    </ul>
-                </li>
-            </ul>
+    <!-- Sidebar -->
+    <aside class="w-60 bg-white shadow-md hidden md:flex flex-col">
+        <div class="px-5 py-4 border-b">
+            <h2 class="text-lg font-bold text-blue-600">Mi Bodeguita</h2>
+            <p class="text-xs text-gray-400">Sistema de Facturación</p>
         </div>
 
-        <!-- Contenido principal -->
-        <div class="col-md-10 p-4">
+        <nav class="p-3 space-y-1 text-sm flex-1">
+            <a href="#" class="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-gray-100">📊 Dashboard</a>
+            <a href="#" class="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-gray-100">🧾 Comprobantes</a>
+            <a href="#" class="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-gray-100">👥 Clientes</a>
+            <a href="#" class="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-gray-100">📦 Productos</a>
+
+            <div class="mt-3 text-[11px] text-gray-400 uppercase">Configuración</div>
+
+            <a href="#" class="flex items-center gap-2 px-3 py-2 rounded-md bg-blue-50 text-blue-600 font-semibold">
+                💳 Métodos de Pago
+            </a>
+            <a href="#" class="px-3 py-2 rounded-md hover:bg-gray-100">Impuestos</a>
+            <a href="#" class="px-3 py-2 rounded-md hover:bg-gray-100">SUNAT</a>
+        </nav>
+    </aside>
+
+    <!-- Main -->
+    <main class="flex-1 flex justify-center p-6">
+
+        <!-- CONTENIDO CENTRADO -->
+        <div class="w-full max-w-6xl space-y-6">
 
             <!-- Header -->
-            <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="flex justify-between items-center">
                 <div>
-                    <h3 class="fw-bold">Métodos de Pago</h3>
-                    <small class="text-muted">
-                        Configura los métodos de pago según SUNAT
-                    </small>
+                    <h1 class="text-2xl font-bold text-gray-800">Métodos de Pago</h1>
+                    <p class="text-sm text-gray-500">Configuración según SUNAT</p>
                 </div>
-                <button class="btn btn-primary">
+
+                <button class="bg-blue-600 text-white px-4 py-2 text-sm rounded-lg hover:bg-blue-700 shadow">
                     + Nuevo método
                 </button>
             </div>
 
-            <!-- Alerta SUNAT -->
-            <div class="alert alert-info d-flex justify-content-between align-items-center">
-                <div>
-                    <strong>Importante:</strong> Los métodos deben cumplir con la tabla 53 de SUNAT.
+            <!-- BANNERS -->
+            <div class="grid md:grid-cols-3 gap-4">
+
+                <!-- Info -->
+                <div class="bg-blue-50 border border-blue-200 p-4 rounded-lg">
+                    <p class="text-xs text-blue-600 font-semibold">Normativa</p>
+                    <p class="text-sm text-blue-800">
+                        Cumple con la tabla 53 de SUNAT.
+                    </p>
                 </div>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Sunat_logo.png" width="80">
+
+                <!-- Warning -->
+                <div class="bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
+                    <p class="text-xs text-yellow-600 font-semibold">Importante</p>
+                    <p class="text-sm text-yellow-800">
+                        Revisa los métodos activos periódicamente.
+                    </p>
+                </div>
+
+                <!-- Success -->
+                <div class="bg-green-50 border border-green-200 p-4 rounded-lg">
+                    <p class="text-xs text-green-600 font-semibold">Estado</p>
+                    <p class="text-sm text-green-800">
+                        Todos los métodos están activos.
+                    </p>
+                </div>
+
             </div>
 
-            <!-- Tabla -->
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="mb-3">Métodos configurados</h5>
+            <!-- MÉTRICAS -->
+            <div class="grid md:grid-cols-3 gap-4">
 
-                    <table class="table table-hover align-middle">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Código</th>
-                                <th>Método</th>
-                                <th>Descripción</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <p class="text-xs text-gray-400">Métodos activos</p>
+                    <p class="text-xl font-bold text-gray-800">5</p>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <p class="text-xs text-gray-400">Más usado</p>
+                    <p class="text-sm font-semibold text-blue-600">Efectivo</p>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <p class="text-xs text-gray-400">Última actualización</p>
+                    <p class="text-sm text-gray-600">Hoy</p>
+                </div>
+
+            </div>
+
+            <!-- TABLA -->
+            <div class="bg-white rounded-lg shadow-sm">
+
+                <div class="flex justify-between items-center px-4 py-3 border-b">
+                    <h2 class="text-sm font-semibold text-gray-700">Métodos configurados</h2>
+
+                    <div class="flex gap-2">
+                        <input type="text" placeholder="Buscar..."
+                            class="text-xs border rounded-md px-2 py-1 focus:ring-1 focus:ring-blue-500">
+
+                        <select class="text-xs border rounded-md px-2 py-1">
+                            <option>Todos</option>
+                            <option>Activos</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="text-gray-500 border-b text-xs">
+                                <th class="py-2 px-4 text-left">Código</th>
+                                <th class="text-left">Método</th>
+                                <th class="text-left">Descripción</th>
+                                <th class="text-center">Estado</th>
+                                <th class="text-right px-4">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>01</td>
-                                <td>Efectivo</td>
-                                <td>Pago en efectivo</td>
-                                <td><span class="badge bg-success">Activo</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary">Editar</button>
-                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+
+                        <tbody class="divide-y">
+
+                            @foreach([
+                                ['01','Efectivo','Pago en efectivo'],
+                                ['02','Depósito','Depósito en cuenta'],
+                                ['03','Transferencia','Transferencia bancaria'],
+                                ['04','Tarjeta','Pago con tarjeta'],
+                                ['06','Yape','Pago móvil']
+                            ] as $metodo)
+
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-2 px-4">{{ $metodo[0] }}</td>
+                                <td class="font-medium">{{ $metodo[1] }}</td>
+                                <td class="text-gray-500 text-xs">{{ $metodo[2] }}</td>
+
+                                <td class="text-center">
+                                    <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs">
+                                        Activo
+                                    </span>
+                                </td>
+
+                                <td class="text-right px-4 space-x-2">
+                                    <button class="text-blue-600 text-xs hover:underline">Editar</button>
+                                    <button class="text-red-600 text-xs hover:underline">Eliminar</button>
                                 </td>
                             </tr>
 
-                            <tr>
-                                <td>02</td>
-                                <td>Depósito</td>
-                                <td>Depósito en cuenta</td>
-                                <td><span class="badge bg-success">Activo</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary">Editar</button>
-                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
-                                </td>
-                            </tr>
+                            @endforeach
 
-                            <tr>
-                                <td>03</td>
-                                <td>Transferencia</td>
-                                <td>Transferencia bancaria</td>
-                                <td><span class="badge bg-success">Activo</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary">Editar</button>
-                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>04</td>
-                                <td>Tarjeta Crédito</td>
-                                <td>Pago con tarjeta</td>
-                                <td><span class="badge bg-success">Activo</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary">Editar</button>
-                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>06</td>
-                                <td>Yape</td>
-                                <td>Pago móvil</td>
-                                <td><span class="badge bg-success">Activo</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary">Editar</button>
-                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Vista previa -->
-            <div class="row mt-4">
-                <div class="col-md-4">
-                    <div class="card shadow-sm">
-                        <div class="card-body">
-                            <h6>Vista previa</h6>
-                            <select class="form-select">
-                                <option>01 - Efectivo</option>
-                                <option>02 - Depósito</option>
-                                <option>03 - Transferencia</option>
-                                <option>04 - Tarjeta</option>
-                                <option>06 - Yape</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card shadow-sm">
-                        <div class="card-body">
-                            <h6>Información SUNAT</h6>
-                            <p class="text-muted">
-                                Tabla 53 - Catálogo de métodos de pago oficiales.
-                            </p>
-                            <a href="#" class="btn btn-outline-primary btn-sm">
-                                Ver más
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            <!-- EXTRA -->
+            <div class="flex justify-between items-center text-xs text-gray-500">
+                <p>Mostrando 5 métodos</p>
+                <button class="text-blue-600 hover:underline">Ver historial</button>
             </div>
 
         </div>
-    </div>
+    </main>
 </div>
-@endsection
+
+</x-app-layout>
