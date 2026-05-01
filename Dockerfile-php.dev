@@ -9,7 +9,10 @@ RUN apt-get update && apt-get install -y \
     unzip \
     curl \
     git \
-    && docker-php-ext-install pdo_mysql mbstring bcmath gd soap zip pdo_pgsql
+    libpq-dev \
+    && docker-php-ext-install pdo_mysql mbstring bcmath gd soap zip \
+    #&& docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+    && docker-php-ext-install pdo pdo_pgsql pgsql
 
 RUN a2enmod rewrite
 
